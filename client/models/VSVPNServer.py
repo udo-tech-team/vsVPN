@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import subprocess
+from common.models.ConfigManager import ConfigContent
 
 class VSVPNServer(object):
     
@@ -15,5 +16,5 @@ class VSVPNServer(object):
         sshCommand = ["ssh",  self._serverHost, "-i", self._clientConfig.get("userKey", "/etc/vsvpn/client_key"), "-l", self._clientConfig.get("vsvpnUser", "vsvpn")] + command
         return subprocess.check_output(sshCommand)
         
-    def loadGateway(self):
-        return self.sendCommand("getVPNParams")
+    def loadParams(self):
+        self._params = ConfigContent(self.sendCommand("getVPNParams"))
