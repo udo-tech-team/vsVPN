@@ -8,6 +8,7 @@ class VSVPNServer(object):
     def __init__(self, clientConfig, serverHost):
         self._clientConfig = clientConfig
         self._serverHost = serverHost
+        self._params = None
         
     def sendCommand(self, command):
         if(isinstance(command, basestring)):
@@ -18,3 +19,8 @@ class VSVPNServer(object):
         
     def loadParams(self):
         self._params = ConfigContent(self.sendCommand("getVPNParams"))
+        
+    def connect(self):
+        print self._params.get("GATEWAY")
+        print self._params.get("NETMASK")
+        

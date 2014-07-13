@@ -15,6 +15,8 @@ if __name__ == '__main__':
     
     if(hostToConnect):
         _vpnServer = VSVPNServer(_clientConfig, hostToConnect)
-        _serverParams = _vpnServer.loadParams()
+        _vpnServer.loadParams()
+        _vpnServer.connect()
+        
     else:
         raise Exception("Unable to find 'vpnServer' config")
