@@ -5,6 +5,7 @@ import pipes
 import subprocess
 import time 
 import re
+import os
 
 class Tunnel(threading.Thread): 
     def __init__(self, config, host, myIp, gateway):
@@ -17,6 +18,7 @@ class Tunnel(threading.Thread):
         self._process = None
         self._interface = None
         self._pppConnected = False
+        self._pid = None
         
     def openpppd(self):
         ipArg = self._myIp+":"+self._gateway
@@ -27,7 +29,8 @@ class Tunnel(threading.Thread):
             
         command = ["/usr/sbin/pppd", "nodetach", "noauth", "passive", "pty", "ssh "+pipes.quote(self._host)+" -i "+pipes.quote(self._config.get("userKey", "/etc/vsvpn/client_key"))+" -l "+pipes.quote(self._config.get("vsvpnUser", "vsvpn"))+" -o Batchmode=yes startLink", "ipparam", "vpn", defaultRoute, ipArg ]
         self._process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        while self._process.poll() == None:
+        
+        while self._process.poll() == None and self.running == True:
             line = self._process.stdout.readline().replace("\n","")
             
             if(self._config.get("verbose_pppd", "false") == "true"):
@@ -41,6 +44,7 @@ class Tunnel(threading.Thread):
                 self._pppConnected = True
                 
             time.sleep(.1)
+        
     
     def getInterface(self):
         return self._interface
@@ -49,8 +53,16 @@ class Tunnel(threading.Thread):
         return self._pppConnected
         
     def stop(self):
-        self._process.kill()
         self.running = False
+        pid = self._process.pid
+        print "Killing pppd "+str(pid)
+        
+        self._process.terminate()
+        try:
+            os.kill(pid, 0)
+            self._process.kill()
+        except OSError:
+            pass
         
     def run(self):
         self.running = True

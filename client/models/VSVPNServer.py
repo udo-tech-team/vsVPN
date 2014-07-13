@@ -29,10 +29,10 @@ class VSVPNServer(object):
         self.tunnel = Tunnel(self._clientConfig, self._serverHost, myIp, self._params.get("GATEWAY"))
         self.tunnel.start()
         
-        while(not tunnel.isConnected()):
+        while(not self.tunnel.isConnected()):
             time.sleep(0.1)
         
-        route = Route(self._clientConfig, myIp, self._params.get("NETMASK", "255.255.255.0"), self._params.get("GATEWAY"), tunnel.getInterface())
+        route = Route(self._clientConfig, myIp, self._params.get("NETMASK", "255.255.255.0"), self._params.get("GATEWAY"), self.tunnel.getInterface())
         route.create()
         
     def disconnect(self):
