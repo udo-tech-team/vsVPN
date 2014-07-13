@@ -26,8 +26,8 @@ class VSVPNShell(object):
             return (2, "Unknown command ")
 
     # Commands managed by the shell
-    def _command_getServerIp(self, args):
-        return (0, self._configFile.get("serverIp", "192.168.200.1"))
+    def _command_getServerGateway(self, args):
+        return (0, self._configFile.get("serverGateway", "192.168.200.1"))
         
     def _command_getNetMask(self, args):
         return (0, self._configFile.get("mask", "255.255.255.0"))
