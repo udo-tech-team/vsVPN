@@ -2,9 +2,9 @@
 
 import subprocess
 from common.models.ConfigManager import ConfigContent
+from client.models.Tunnel import Tunnel
 
-class VSVPNServer(object):
-    
+class VSVPNServer(object):   
     def __init__(self, clientConfig, serverHost):
         self._clientConfig = clientConfig
         self._serverHost = serverHost
@@ -20,7 +20,7 @@ class VSVPNServer(object):
     def loadParams(self):
         self._params = ConfigContent(self.sendCommand("getVPNParams"))
         
-    def connect(self):
-        print self._params.get("GATEWAY")
-        print self._params.get("NETMASK")
+    def connect(self, myIp):
+        tunnel = Tunnel(self._clientConfig, self._serverHost, myIp, self._params.get("GATEWAY", "255.255.255.0"))
+        tunnel.start()
         

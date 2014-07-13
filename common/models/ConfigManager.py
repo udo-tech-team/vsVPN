@@ -30,9 +30,9 @@ class ConfigFile(ConfigObject):
             
     def get(self, parameter, defaultValue = None):
         if(self._configFile):
+            self._configFile.seek(0)
             for line in self._configFile.readlines():
-                
-                if(len(line) > 0 and line[0] != "#"):
+               if(len(line) > 0 and line[0] != "#"):
                     line = line.replace("\n","").split("=")
                     param = line[0]
                     if(param == parameter):
