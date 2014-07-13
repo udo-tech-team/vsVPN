@@ -15,6 +15,6 @@ if __name__ == '__main__':
     
     if(hostToConnect):
         _vpnServer = VSVPNServer(_clientConfig, hostToConnect)
-        _vpnServer.loadGateway()
+        print "-"+_vpnServer.loadGateway()+"-"
     else:
         raise Exception("Unable to find 'vpnServer' config")

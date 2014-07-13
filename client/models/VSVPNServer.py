@@ -12,8 +12,8 @@ class VSVPNServer(object):
         if(isinstance(command, basestring)):
             command = [command]
             
-        sshCommand = ["ssh",  self._serverHost, "-i", self._clientConfig.get("userKey", "/etc/vsvpn/client_key")] + command
-        subprocess.call(sshCommand)
+        sshCommand = ["ssh",  self._serverHost, "-i", self._clientConfig.get("userKey", "/etc/vsvpn/client_key"), "-l", self._clientConfig.get("vsvpnUser", "vsvpn")] + command
+        return subprocess.check_output(sshCommand)
         
     def loadGateway(self):
         return self.sendCommand("getServerGateway")

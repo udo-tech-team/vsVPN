@@ -18,6 +18,6 @@ class ConfigFile(object):
                     param = line[0]
                     if(param == parameter):
                         del line[0]
-                        return "=".join(line)
+                        return "=".join(line).replace("\n","")
          
         return defaultValue
