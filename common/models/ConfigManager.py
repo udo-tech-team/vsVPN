@@ -9,7 +9,7 @@ class ConfigContent(ConfigObject):
         self._configContent = configContent
 
     def get(self, parameter, defaultValue = None):
-        if(self._configFile):
+        if(self._configContent):
             for line in self._configContent.split("\n"):          
                 if(len(line) > 0 and line[0] != "#"):
                     line = line.replace("\n","").split("=")
