@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-
-
 import shlex
+import subprocess
 from common.models.ConfigManager import ConfigFile
 
 class VSVPNShell(object):
@@ -35,3 +34,8 @@ class VSVPNShell(object):
     def _command_getVPNParams(self, args):
         result = "GATEWAY="+self._configFile.get("serverGateway", "192.168.200.1")+"\n"+"NETMASK="+self._configFile.get("mask", "255.255.255.0")
         return (0, result)
+    
+    def _command_startLink(self, args):
+        process = subprocess.call(['sudo', '-A', '/usr/sbin/pppd', 'nodetach', 'notty', 'noauth'])
+        if process != 0:
+            raise Exception("I was not able to start pppd. I may not have sudo access.")
