@@ -2,9 +2,13 @@
 
 from common.models.ConfigManager import ConfigFile
 from client.models.VSVPNServer import VSVPNServer
+
 import sys
+import signal
+import os 
 
 DEFAULT_CONFIG_FILE = "/etc/vsvpn/client.conf"
+
 
 if __name__ == '__main__':
     _clientConfigFile = DEFAULT_CONFIG_FILE
@@ -12,9 +16,11 @@ if __name__ == '__main__':
     
     hostToConnect = _clientConfig.get("vpnServer")
     
+    if(not os.path.exists('/etc/ppp/options')):
+        open('/etc/ppp/options','w').close()
+        
     if(hostToConnect):
         _myIp = _clientConfig.get("myIp", "auto")
-
         _vpnServer = VSVPNServer(_clientConfig, hostToConnect)
         _vpnServer.loadParams()
         _vpnServer.connect(_myIp) 

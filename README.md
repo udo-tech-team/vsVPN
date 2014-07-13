@@ -49,6 +49,5 @@ This a Very Simple VPN program based on SSH and PPPD
  
 ##Todo 
 
- - routes management on the client side
  - Add a way to automatically attribute IP adress
  - Improve reconnexion

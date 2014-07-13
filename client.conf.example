@@ -6,3 +6,10 @@ myIp=192.168.200.203
 
 # SSH private key to connect
 userKey=/etc/vsvpn/client_key
+
+# Default route ?
+defaultroute=true
+
+# Verbosity
+verbose_pppd=true
+verbose_routes=true
