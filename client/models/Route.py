@@ -14,7 +14,9 @@ class Route(object):
     def create(self):
         if(platform.system() == 'Darwin'):
             args = ['route', 'add', '-net', self._ip, '-netmask', self._netmask, '-interface', self._interface, '-gateway', self._gateway]
-           
+        if(platform.system() == "Linux"):
+            args = ['route', 'add', '-net', self._ip, 'netmask', self._netmask, 'dev', self._interface, 'gw', self._gateway]
+            
         if(self._config.get("verbose_routes", "false") == "true"):
             print "{route} " + " ".join(args)
             
