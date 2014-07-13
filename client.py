@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-from common.models.ConfigFile import ConfigFile
+from common.models.ConfigManager import ConfigFile
+from common.models.ConfigManager import ConfigContent
 
 from client.models.VSVPNServer import VSVPNServer
 
@@ -15,6 +16,6 @@ if __name__ == '__main__':
     
     if(hostToConnect):
         _vpnServer = VSVPNServer(_clientConfig, hostToConnect)
-        print "-"+_vpnServer.loadGateway()+"-"
+        _serverParams = ConfigContent(_vpnServer.loadGateway())
     else:
         raise Exception("Unable to find 'vpnServer' config")

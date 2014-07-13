@@ -2,7 +2,7 @@
 
 
 import shlex
-from common.models.ConfigFile import ConfigFile
+from common.models.ConfigManager import ConfigFile
 
 class VSVPNShell(object):
     def __init__(self, configFile):
