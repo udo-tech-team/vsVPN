@@ -13,10 +13,10 @@ class ConfigContent(ConfigObject):
             for line in self._configContent.split("\n"):          
                 if(len(line) > 0 and line[0] != "#"):
                     line = line.replace("\n","").split("=")
-                    param = line[0]
+                    param = line[0].strip()
                     if(param == parameter):
                         del line[0]
-                        return "=".join(line).replace("\n","")
+                        return "=".join(line).replace("\n","").strip()
          
         return defaultValue
         
@@ -34,9 +34,9 @@ class ConfigFile(ConfigObject):
             for line in self._configFile.readlines():
                if(len(line) > 0 and line[0] != "#"):
                     line = line.replace("\n","").split("=")
-                    param = line[0]
+                    param = line[0].strip()
                     if(param == parameter):
                         del line[0]
-                        return "=".join(line).replace("\n","")
+                        return "=".join(line).replace("\n","").strip()
          
         return defaultValue
