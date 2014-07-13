@@ -26,8 +26,8 @@ class VSVPNServer(object):
         return self._serverHost
         
     def connect(self, myIp):
-        tunnel = Tunnel(self._clientConfig, self._serverHost, myIp, self._params.get("GATEWAY"))
-        tunnel.start()
+        self.tunnel = Tunnel(self._clientConfig, self._serverHost, myIp, self._params.get("GATEWAY"))
+        self.tunnel.start()
         
         while(not tunnel.isConnected()):
             time.sleep(0.1)
@@ -36,4 +36,7 @@ class VSVPNServer(object):
         route.create()
         
     def disconnect(self):
-        tunnel.stop()
+        try:
+            self.tunnel.stop()
+        except NameError:
+            print "I have never been connected!"
