@@ -40,9 +40,12 @@ This a Very Simple VPN program based on SSH and PPPD
  
  - Copy client.conf.example into /etc/vsvpn/client.conf
  - Start the client as root
+ 
  ```bash
+
 	sudo ./client.py
  ```
+ 
  
 ##Todo 
 
