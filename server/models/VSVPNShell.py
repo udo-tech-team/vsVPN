@@ -33,6 +33,5 @@ class VSVPNShell(object):
         return (0, self._configFile.get("mask", "255.255.255.0"))
         
     def _command_getVPNParams(self, args):
-        result = "GATEWAY="+self._configFile.get("serverGateway", "192.168.200.1")+"\n"+
-        "NETMASK="+self._configFile.get("mask", "255.255.255.0")
+        result = "GATEWAY="+self._configFile.get("serverGateway", "192.168.200.1")+"\n"+"NETMASK="+self._configFile.get("mask", "255.255.255.0")
         return (0, result)
