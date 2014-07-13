@@ -21,6 +21,9 @@ class VSVPNServer(object):
         
     def loadParams(self):
         self._params = ConfigContent(self.sendCommand("getVPNParams"))
+    
+    def getServerHost(self):
+        return self._serverHost
         
     def connect(self, myIp):
         tunnel = Tunnel(self._clientConfig, self._serverHost, myIp, self._params.get("GATEWAY"))
