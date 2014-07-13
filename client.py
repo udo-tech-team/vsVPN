@@ -13,5 +13,8 @@ if __name__ == '__main__':
     
     hostToConnect = _clientConfig.get("vpnServer")
     
-    _vpnServer = VSVPNServer(hostToConnect)
-    _vpnServer.getGateway
+    if(hostToConnect):
+        _vpnServer = VSVPNServer(_clientConfig, hostToConnect)
+        _vpnServer.loadGateway()
+    else:
+        raise Exception("Unable to find 'vpnServer' config")
