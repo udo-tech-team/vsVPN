@@ -25,7 +25,7 @@ class Tunnel(threading.Thread):
         else:
             defaultRoute = "nodefaultroute"
             
-        command = ["/usr/sbin/pppd", "nodetach", "noauth", "passive", "pty", "ssh "+pipes.quote(self._host)+" -i "+pipes.quote(self._config.get("userKey", "/etc/vsvpn/client_key"))+" -l "+pipes.quote(self._config.get("vsvpnUser", "vsvpn"))+" -o Batchmode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null startLink", "ipparam", "vpn", defaultRoute, ipArg ]
+        command = ["/usr/sbin/pppd", "nodetach", "noauth", "passive", "pty", "ssh "+pipes.quote(self._host)+" -i "+pipes.quote(self._config.get("userKey", "/etc/vsvpn/client_key"))+" -l "+pipes.quote(self._config.get("vsvpnUser", "vsvpn"))+" -o Batchmode=yes startLink", "ipparam", "vpn", defaultRoute, ipArg ]
         self._process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         while self._process.poll() == None:
             line = self._process.stdout.readline().replace("\n","")
