@@ -1,0 +1,8 @@
+# IP of the VSVPN server
+vpnServer=
+
+# My IP on the VPN
+myIp=192.168.200.203
+
+# SSH private key to connect
+userKey=/etc/vsvpn/client_key
