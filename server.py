@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from models.VSVPNShell import VSVPNShell
+from server.models.VSVPNShell import VSVPNShell
 import sys, getopt
 
 if __name__ == '__main__':

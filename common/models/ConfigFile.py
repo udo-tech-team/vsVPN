@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import Exceptions
 
 class ConfigFile(object):
     def __init__(self, configFilePath):
@@ -13,10 +12,12 @@ class ConfigFile(object):
     def get(self, parameter, defaultValue = None):
         if(self._configFile):
             for line in self._configFile.readlines():
-                line = line.replace("\n","").split("=")
-                param = line[0]
-                if(param == parameter):
-                    del line[0]
-                    return "=".join(line)
+                
+                if(len(line) > 0 and line[0] != "#"):
+                    line = line.replace("\n","").split("=")
+                    param = line[0]
+                    if(param == parameter):
+                        del line[0]
+                        return "=".join(line)
          
         return defaultValue

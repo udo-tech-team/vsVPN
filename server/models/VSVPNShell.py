@@ -3,7 +3,7 @@
 DEFAULT_CONFIG_FILE = "/etc/vsvpn/server.conf"
 
 import shlex
-from models.ConfigFile import ConfigFile
+from common.models.ConfigFile import ConfigFile
 
 class VSVPNShell(object):
     def __init__(self, configFile = DEFAULT_CONFIG_FILE):
@@ -26,5 +26,9 @@ class VSVPNShell(object):
         except AttributeError:
             return (2, "Unknown command ")
 
-    def _command_getLocalIp(self, args):
+    # Commands managed by the shell
+    def _command_getServerIp(self, args):
         return (0, self._configFile.get("serverIp", "192.168.200.1"))
+        
+    def _command_getNetMask(self, args):
+        return (0, self._configFile.get("mask", "255.255.255.0"))
