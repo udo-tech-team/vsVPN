@@ -16,4 +16,4 @@ class VSVPNServer(object):
         return subprocess.check_output(sshCommand)
         
     def loadGateway(self):
-        return self.sendCommand("getServerGateway")
+        return self.sendCommand("getVPNParams")
