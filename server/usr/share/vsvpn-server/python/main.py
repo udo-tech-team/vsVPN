@@ -1,10 +1,19 @@
 #!/usr/bin/env python
 
-from models.VSVPNServer import VSVPNServer
+from models.VSVPNShell import VSVPNShell
+import sys, getopt
 
 if __name__ == '__main__':
-    _vsServer = VSVPNServer()
+    _vsShell = VSVPNShell()
+    args = sys.argv
+    
     try:
-        _vsServer.mainLoop()
-    except KeyboardInterrupt:
-        pass
+        while ( args[0] != "-c" ):
+            del args[0]
+    
+        del args[0]
+    except IndexError:
+        args = []
+            
+    returnCode = _vsShell.main(args)
+    sys.exit(returnCode)

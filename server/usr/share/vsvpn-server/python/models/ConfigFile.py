@@ -7,15 +7,16 @@ class ConfigFile(object):
         self._configFilePath = configFilePath
         try:
             self._configFile = open(self._configFilePath, 'r')
-        except IOError
-            pass
+        except IOError:
+            self._configFile = None
             
-    def readParameter(self, parameter, defaultValue = None):
-         for line in self._configFile.readlines():
-             line = line.replace("\n","").split("=")
-             param = line[0]
-             if(param == parameter):
-                 del line[0]
-                 return "=".join(line)
+    def get(self, parameter, defaultValue = None):
+        if(self._configFile):
+            for line in self._configFile.readlines():
+                line = line.replace("\n","").split("=")
+                param = line[0]
+                if(param == parameter):
+                    del line[0]
+                    return "=".join(line)
          
-         return defaultValue
+        return defaultValue
