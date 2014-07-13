@@ -3,8 +3,10 @@
 from server.models.VSVPNShell import VSVPNShell
 import sys, getopt
 
+DEFAULT_CONFIG_FILE = "/etc/vsvpn/server.conf"
+
 if __name__ == '__main__':
-    _vsShell = VSVPNShell()
+    _vsShell = VSVPNShell(DEFAULT_CONFIG_FILE)
     args = sys.argv
     
     try:

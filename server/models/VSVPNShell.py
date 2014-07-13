@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 
-DEFAULT_CONFIG_FILE = "/etc/vsvpn/server.conf"
 
 import shlex
 from common.models.ConfigFile import ConfigFile
 
 class VSVPNShell(object):
-    def __init__(self, configFile = DEFAULT_CONFIG_FILE):
+    def __init__(self, configFile):
         self._configFile = ConfigFile(configFile)
         
     def main(self, args):
